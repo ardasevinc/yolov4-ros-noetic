@@ -1,6 +1,8 @@
 subscribers:
 
   camera_reading:
+    # change camera topic because it doesn't read it from the launch file
+    # topic: /openni_kinect/color/image_raw
     topic: /camera/rgb/image_raw
     queue_size: 1
 

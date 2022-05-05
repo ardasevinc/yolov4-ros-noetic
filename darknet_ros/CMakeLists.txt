@@ -25,11 +25,11 @@ if (CUDA_FOUND)
     -O3
     # -gencode arch=compute_30,code=sm_30
     # -gencode arch=compute_35,code=sm_35
-    # -gencode arch=compute_50,code=[sm_50,compute_50]
+    -gencode arch=compute_50,code=[sm_50,compute_50]
     # -gencode arch=compute_52,code=[sm_52,compute_52]
     # -gencode arch=compute_61,code=sm_61
     # -gencode arch=compute_62,code=sm_62
-    -gencode arch=compute_86,code=sm_86
+    # -gencode arch=compute_86,code=sm_86
   )
   add_definitions(-DGPU)
 else()
@@ -48,7 +48,8 @@ endif ( X11_FOUND )
 
 # Find rquired packeges
 find_package(Boost REQUIRED COMPONENTS thread)
-find_package(OpenCV REQUIRED)
+find_package(OpenCV 4 REQUIRED)
+message( "OpenCV targeted version : ${OpenCV_VERSION}" )
 include_directories(${OpenCV_INCLUDE_DIRS})
 find_package(catkin REQUIRED
   COMPONENTS
@@ -198,6 +199,9 @@ else()
   )
 
 endif()
+
+message("OpenCV_LIBRARIES: ${OpenCV_LIBRARIES}")
+message("OpenCV_LIBS: ${OpenCV_LIBS}")
 
 target_link_libraries(${PROJECT_NAME}_lib
   m
